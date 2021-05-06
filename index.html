@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans-CN">
   <head>
     <meta charset="UTF-8" />
     <title>郑进怀's Document</title>
@@ -20,19 +20,56 @@
       <a href="https://github.com/zhengjinhuai" target="_blank">Github</a>
     </nav>
     <div id="app">加载中</div>
+
     <script>
       window.$docsify = {
-        name: '',
         repo: '',
+        name: '',
+
+        // 搜索插件配置
+        search: {
+          maxAge: 86400000,
+          // paths: [], // or 'auto'
+          placeholder: '搜索',
+          noData: '找不到结果!',
+          depth: 6,
+        },
+
+        // 侧边栏配置
         loadSidebar: true,
-        subMaxLevel: 2,
-        search: 'auto',
+        subMaxLevel: 3,
+
+        // 顶部导航栏配置
         loadNavbar: true,
+        // 封面配置
+        // onlyCover: false,
+        // coverpage: true,
+        // 字数配置
+        // ga: 'UA-XXXXX-Y',
+
+        // 插件配置
+        plugins: [
+          function (hook) {
+            var footer = [
+              '<hr/>',
+              '<footer>',
+              '<span><a href="https://github.com/zhengjinhuai" target="_blank">郑进怀</a> &copy;2021</span>',
+              '</footer>',
+            ].join('')
+
+            hook.afterEach(function (html) {
+              return html + footer
+            })
+          },
+        ],
       }
     </script>
     <!-- Docsify v4 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script> -->
+    <!-- 代码高亮 start -->
+    <!-- 代码高亮 end -->
   </body>
 </html>
