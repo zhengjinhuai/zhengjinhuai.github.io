@@ -7,3 +7,4 @@
 - [Network](Network.md 'Network')
 - [Algorithm](Algorithm.md 'Algorithm')
 - [Exercises](Exercises.md 'Exercises')
+- [Data Structure](DataStructure.md 'Data Structure')

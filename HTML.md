@@ -1,5 +1,19 @@
 # HTML
 
+## 行内元素 和 块级元素 的区别？ 行内元素有那些？块级元素有那些？
+
+区别：
+
+- 块级元素会独占一行，其宽度自动填满其父元素宽度；
+- 行内元素不会独占一行，相邻的行内元素会排列在同一行，直至一行排不下才会换行，其宽度随元素的内容而变化。
+- 块级元素可以包含行内元素和块级元素；行内元素不能包含块级元素。
+- 行内元素设置 width、height、margin-top、margin-bottom、padding-top、padding-bottom 无效。
+
+分别有哪些
+
+- 块级元素：div、h1-h6、p、pre、ul、li、ol、form、table、
+- 行内元素：a、img、span、i、em、sub、sup、button、input、textarea、select、img、label
+
 ## 1. HTML 文件格式
 
 - meta 标签：
