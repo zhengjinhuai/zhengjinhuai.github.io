@@ -10,7 +10,7 @@
 
 ## 数组扁平化
 
-> (js5 种方式实现数组扁平化)[https://www.cnblogs.com/chenhuichao/p/13564682.html]
+> [js5 种方式实现数组扁平化](https://www.cnblogs.com/chenhuichao/p/13564682.html)
 
 1. reduce
 
@@ -69,6 +69,59 @@ function deepClone(obj = {}) {
 }
 ```
 
+## 鼠标拖拽事件
+
+- 主要是 down、up、move 事件对象，div 绑定 onmousedown 和 up 事件、window 设置 move 事件
+- 通过 clientX 和 clientY 获取 x 和 y 的坐标
+- 通过 offsetLeft 和 offsetTop 获取左部和顶部的偏移量
+- 设置拖拽 flag，为 true 计算拖拽坐标
+- style.left = window 的 clientX 加上原先的左部偏移量 减去之前 x 坐标
+
+```javascript
+//获取元素
+var dv = document.getElementById('dv')
+var x = 0
+var y = 0
+var l = 0
+var t = 0
+var isDown = false
+//鼠标按下事件
+dv.onmousedown = function (e) {
+  //获取x坐标和y坐标
+  x = e.clientX
+  y = e.clientY
+
+  //获取左部和顶部的偏移量
+  l = dv.offsetLeft
+  t = dv.offsetTop
+  //开关打开
+  isDown = true
+  //设置样式
+  dv.style.cursor = 'move'
+}
+//鼠标移动
+window.onmousemove = function (e) {
+  if (isDown == false) {
+    return
+  }
+  //获取x和y
+  var nx = e.clientX
+  var ny = e.clientY
+  //计算移动后的左偏移量和顶部的偏移量
+  var nl = nx - (x - l)
+  var nt = ny - (y - t)
+
+  dv.style.left = nl + 'px'
+  dv.style.top = nt + 'px'
+}
+//鼠标抬起事件
+dv.onmouseup = function () {
+  //开关关闭
+  isDown = false
+  dv.style.cursor = 'default'
+}
+```
+
 ## 简单
 
 ### 求最大公约数
@@ -100,4 +153,28 @@ def bubbleSort(arr):
   return arr
 ```
 
-###
+## 手撕代码系列
+
+> [32 个手写 JS，巩固你的 JS 基础（面试高频）](https://juejin.cn/post/6875152247714480136#heading-41)
+
+### 图片懒加载
+
+```javascript
+function lazyload() {
+  const imgs = document.getElementByTagName('img')
+  const len = imgs.length
+  // 视口的高度
+  const viewHeight = document.documentElement.clientHeight
+  // 滚动条高度
+  const scrollHeight =
+    document.documentElement.scrollTop || document.body.scrollTop
+  for (let i = 0; i < len; i++) {
+    const offsetHeight = imgs[i].offsetTop
+    if (offsetHeight < viewHeight + scrollHeight) {
+      const src = imgs[i].dataset.src
+      imgs[i].src = src
+    }
+  }
+}
+window.addEventListener('scroll', lazyload)
+```

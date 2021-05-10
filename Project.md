@@ -23,6 +23,11 @@
     - v-if 实现元素的定制化
 - 跨域
 - 性能优化
+- 移动端点击延迟事件
+  - 原因：浏览器会在 touched 和 click 事件之间，等待 300-350ms，判断用户是否会进行双击手势以缩放文字
+  - 解决方案：
+    - 禁用缩放：<meta name="viewport" content="user-scaleable=no">，缺点：网页无法进行缩放
+    - fastclick：在检测到 touchend 事件的时候，会通过 dom 自定义事件立即发出模拟 click 事件，并把浏览器在 300ms 之后真正的 click 事件阻止掉，缺点：脚本相对较大
 
 ## 2. 难点与解决方法
 

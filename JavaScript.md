@@ -64,13 +64,13 @@ EventLoop
 ##　网络请求与远程资源
 
 ### AJAX
+
 1. 五种状态
-- 0：未初始化，没调用send()
-- 1: 载入，已调用send()，正在发送请求
+
+- 0：未初始化，没调用 send()
+- 1: 载入，已调用 send()，正在发送请求
 - 2：载入完成
 - 3：
-
-
 
 ### Web Socket
 
@@ -89,3 +89,5 @@ EventLoop
 ## for...of, forEach
 
 1. forEach 结束循环：throw new Error("结束循环")
+
+## Proxy

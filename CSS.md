@@ -24,10 +24,79 @@
 
 ## 2. 水平居中
 
+行内元素：
+
 ## 3. 垂直居中
+
+3.5 flex
+
+```css
+#parent {
+  display: flex;
+  justify-content: center;
+  align-item: center;
+}
+```
 
 ## 4. 圣杯布局
 
 ## 5. 双飞翼布局
 
 ## 伪类有哪些？
+
+- link
+- visited
+- hover
+- active
+- :first-child
+- :last-child
+- nth-child
+
+## CSS3 新特性
+
+1. 过渡 transition
+2. 动画 annimation
+3. 转换 transform
+4. 选择器
+
+## flex
+
+1. 父容器
+
+- flex-direction：
+- justify-content:
+- align-items：
+- flex-wrap：
+- align-content：
+
+2. 子容器
+
+- flex：flex-grow flex-shrink flex-basis
+- align-self
+
+## BFC
+
+> 块级格式化上下文，里面的元素样式不会在布局上影响外面元素
+> 如何触发 BFC:
+
+- body 根元素
+- 浮动元素：除 none 以外的值
+- position 为 absolute 或 fixed
+- display 为 inline-block、flex 或 table-cells
+- overflow 除 visible 以外的值
+
+## 清除浮动
+
+```css
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+```

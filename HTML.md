@@ -42,12 +42,12 @@
 
 ### 2.1 新增标签
 
+- 新增语义化标签：footer、nav、section、header、article
 - 表单类型：input 中 type 属性等于 email、number、url、search、color、tel 和 date
-
 - 视频和音频：video 和 audio
 - Canvas 绘图：`<canvas></canvas>`
 - SVG 矢量绘图
-- 拖放属性：
+- 拖放属性：`<div id="draggable" class="draggable" draggable="true">`
 - 地理定位：getCurrentPosition
 - web 存储：
   - localStorage：持久性存储
@@ -55,6 +55,14 @@
 - 离线存储：在文档的 html 标签中包含 manifest 属性，每个指定 manifest 的页面在用户访问的时候都会被缓存
 
 ### 2.2 WebSocket
+
+### 2.3 Web Woker
+
+### 2.4 废除元素
+
+- 纯表现元素：font/center/u 用 css 代替
+- 部分浏览器支持的元素：applet/bgsound/blink
+- 对可用性产生负面影响的元素：frameset/frame/noframes，在 html5 中不支持 frame 框架，只支持 iframe 框架
 
 #### 2.2.1 是什么？
 
