@@ -1,4 +1,4 @@
-# 浩鲸面经
+# 面经
 
 ## CSS3 新特性
 
@@ -330,11 +330,12 @@ this.$bus.$emit(eventName, args)
 ## 6. vue 中 computed 和 watch 区别
 
 > 参考链接[Vue 中 computed 和 watch 的区别](https://www.cnblogs.com/jiajialove/p/11327945.html)
-> 计算属性 computed：
+
+计算属性 computed：
 
 1. 支持缓存，只要依赖数据发生变化，才会重新进行计算
 2. 不支持异步，当 computed 内有异步操作时无效，无法监听数据变化
-3. computed 属性值默认会走缓存，计算属性市基于他们的响应式依赖进行缓存的，也就是基于 data 中声明过或父组件传递的 props 中的数据通过计算得到的值
+3. computed 属性值默认会走缓存，计算属性是基于他们的响应式依赖进行缓存的，也就是基于 data 中声明过或父组件传递的 props 中的数据通过计算得到的值
 4. 如果一个属性是由其他属性计算而来的，这个属性依赖其他值，是一个多对一或者一对一，一般用 computed
 5. computed 属性值是函数，默认走 get 方法；函数返回值就是属性的属性值；在 computed 中，属性都有一个 get 和 set 方法，当数据发生变化时调用 set 方法
 

@@ -153,7 +153,7 @@ def bubbleSort(arr):
   return arr
 ```
 
-## 手撕代码系列
+## 手写代码系列
 
 > [32 个手写 JS，巩固你的 JS 基础（面试高频）](https://juejin.cn/post/6875152247714480136#heading-41)
 
@@ -177,4 +177,41 @@ function lazyload() {
   }
 }
 window.addEventListener('scroll', lazyload)
+```
+
+### AJAX
+
+- 主要先判断 readyState 是否等于 4，等于 4 即表示已经收到所有响应，可以使用了
+- 接着判断 http 状态码是否是 200-300 之间，如果执行异步函数
+- 每次 readyState 变化时，都会触发 readystatechange 事件
+
+```javascript
+function request(method, url, data){
+  return new Promise((resolve, reject)) => {
+    let handler = function(){
+      if(this.readyState !== 4) return;
+      if(this.status == 200){
+        return resolve(this.response);
+      } else {
+        return reject(this.statusText)
+      }
+    }
+
+    let xhr = XMLHttpRequest();
+    xhr.onreadystatechange = hander;
+
+    if(method.toLowerCase() === 'get'){
+      url += '?';
+      for (let key in data){
+        url += `${key}=${data[key]}&`
+      }
+      url = url.slice(0, url.length-1)
+      xhr.open(method, url);
+      xhr.send();
+    } else{
+      xhr.open(method, url);
+      xhr.send(data)
+    }
+  })
+}
 ```

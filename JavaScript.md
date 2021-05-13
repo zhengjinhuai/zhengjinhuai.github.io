@@ -65,12 +65,28 @@ EventLoop
 
 ### AJAX
 
+> 异步 JavaScript 加 XML，主要对象是 XMLHttpRequest
+
+```javascript
+let xhr = new XMLHttpRequest()
+xhr.open() // 首先调用open方法，三个参数（请求类型，请求URL，表示请求是否是异步: false为同步）
+xhr.send(null)
+```
+
+收到响应后，XHR 对象有以下属性：
+
+- responseText：作为响应体返回的文本
+- responseXML：如果响应类型是 text/xml 或者 application/xml，那就是包含响应数据的 XML DOM 文档
+- status：响应的 HTTP 状态
+- statusText：响应的 http 状态描述
+
 1. 五种状态
 
-- 0：未初始化，没调用 send()
-- 1: 载入，已调用 send()，正在发送请求
-- 2：载入完成
-- 3：
+- 0：未初始化。尚未调用 open()方法
+- 1：已打开，已调用 open()方法，尚未调用 send()方法
+- 2：已发送，已调用 send()方法，尚未收到响应
+- 3：接受中，已经收到部分响应
+- 4：完成，已经收到所有响应，可以使用了
 
 ### Web Socket
 

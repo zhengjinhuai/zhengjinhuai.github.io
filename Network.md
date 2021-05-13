@@ -7,7 +7,7 @@
 ### 1.2 跨域的解决方法？
 
 - JSONP
-  - JSONP 原理：利用 script 标签没有跨域限制的漏洞，网页可以得到其他来源动态产生的 json 数据。需要对方服务器支持，比如访问<script src="https://imooc.com">，同理访问<script src="https://imooc.com/getData.js">
+  - JSONP 原理：利用 script 标签没有跨域限制的漏洞，网页可以得到其他来源动态产生的 json 数据。需要对方服务器支持，比如访问`<script src="https://imooc.com">`，同理访问`<script src="https://imooc.com/getData.js">`
 - WebSocket
   - websocket 是 html5 的一个持久化协议，它实现了浏览器与服务器的全双工通信，同时也是一种跨域的解决方法。
   - 原生 websocket api 使用起来不太方便，我们使用 Socket.io，它封装得比较好，提供了更简单、灵活得接口，也对不支持 webSocket 的浏览器提供了向下兼容
@@ -53,12 +53,12 @@
 1. 请求报文
 
 - 请求方式
-- host
-- connection
+- host：发送请求的页面所在的域
+- connection：
 - user-agent
-- accept
-- accept-language
-- cache-control
+- accept：浏览器可以处理的内容类型
+- accept-language：浏览器使用的语言
+- cache-control：
 - if-modified-since
 - if-none-match
 - cookie
@@ -126,7 +126,7 @@
 
 ### 二次握手可以吗？
 
-不可以，两方面：
+不可以，四个方面：
 
 - 确认双方的收发能力
 - 序列号可靠同步
@@ -146,16 +146,41 @@
 
 ## 前端安全
 
-### CSRF 攻击（跨站伪造请求）
+### CSRF 攻击（跨站请求伪造）
+
+#### 概念
 
 - 就是当用户访问黑客网站，在该网站进行的操作会操作到其他网页上，主要利用用户的登录状态发起的跨站请求
+- 三个必要条件：
+
+  - 目标站点（服务器端）一定要有 CSRF 漏洞；
+  - 用户需要登录目标站点，并且在浏览器上保持有该站点的登录状态
+  - 需要用户打开一个第三方站点
+
+#### 类型
+
+- 自动发起 get 请求
+  - 举例：在恶意网站中，有一个图片 src 对应一个转账 api，当用户被引诱进黑客的页面，页面被加载的时候，浏览器就会自动发起 img 资源请求，同时，借用用户的登录状态，完成转账的操作
+- 自动发起 post 请求
+  - 举例：在恶意网站中，有一个隐藏的表单，表单内容为转账 api，当用户点击进入这个网页，表单被自动提交，服务器就会执行转账操作
+- 引诱用户点击链接
+
+  - 举例：通过引诱用户点击黑客的链接，链接为转账 api，一旦点击链接，服务器就会执行转账操作。
 
 - 怎么防御
   - 通过设置 cookie 的 samesite 属性
+    - 从第三方站点发起的请求，禁止 cookie 的发送
+    - http 响应头里面，通过 set-cookie 字段设置 cookie 时，可以带上 samesite 选项
+    - samesite 有三个值
+      - strict：严格模式，浏览器禁止第三方 cookie
+      - lax：相对宽松，跨站点情况下，从第三方站点的链接打开或提交 get 方式的表单两种方式会携带 cookie；但是如果在第三方站点中使用 post 方法，或者通过 img、iframe 等标签加载 url，这些场景都不会携带 cookie
+      - None：在任何情况都会发送 cookie 数据
   - 验证请求的来源站点
     - http 请求头中的 referer 和 Origin 属性
-      - referer：记录该 http 请求的来源低质
-      - origin
+      - referer：记录该 http 请求的来源地址，包括：**协议+域名+查询参数（不包含锚点信息）**
+      - origin：标识出最初请求是哪里发起的，包括：**协议+端口号**
+        - 一般只存在 CORS 跨域请求中，response 有对应的 header: `Access-Contorl-Allow-Origin`
+      -
   - CSRF token
     - 浏览器向服务器发送请求时，服务器生成一个 csrf token，就是一个字符串，然后将该字符串植入到返回的网页中，存放在 localStorage 中
     - 如果是从第三方发送的请求，则无法获得 csrf token
