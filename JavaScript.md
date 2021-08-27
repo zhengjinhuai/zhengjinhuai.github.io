@@ -34,6 +34,37 @@ this 的值取决于函数执行的时候
   - 生成器 Generators/yield
   - Async/Await
 
+### Promise 如何捕获异常
+
+1. Promise().then 第二个参数可以捕获异常
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+  reject('错误')
+})
+
+promise.then(
+  () => {},
+  (error) => {
+    console.log(error) //'错误'
+  }
+)
+```
+
+- 执行完会返回新的 fulfilled 状态的 promise，等价于 return Promise.resolve()，下面 catch 例子等同。
+
+2. Promise().catch
+
+```javascript
+let promise = new Promise((resolve, reject) => {
+  reject('错误')
+})
+
+promise.catch((error) => {
+  console.log(error)
+})
+```
+
 ## 4. Async / Await
 
 ### 4.1. 基本语法
@@ -43,6 +74,21 @@ async function f() {
   return 'Hey, Jinhuai!'
 }
 f().then((v) => console.log(v))
+```
+
+### 4.2 捕获异常
+
+1. 直接在外面 catch 或者使用 try...catch
+
+```javascript
+async function test() {
+  try {
+    await new Promise((resolve, reject) => reject('错误'))
+  } catch (error) {
+    console.log(error) //错误
+  }
+}
+test()
 ```
 
 ## 宏任务和微任务
